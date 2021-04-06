@@ -1,6 +1,7 @@
 package org.zerock.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.zerock.domain.BoardVO;
@@ -56,7 +57,8 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return mapper.getTotalCount(cri);
 	}
-	
+
+
 	
 	
 }

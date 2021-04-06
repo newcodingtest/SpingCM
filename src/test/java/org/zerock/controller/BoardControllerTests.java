@@ -1,5 +1,9 @@
 package org.zerock.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.zerock.domain.BoardVO;
+import org.zerock.mapper.BoardMapper;
 import org.zerock.service.BoardServiceTests;
 
 import lombok.Setter;
@@ -28,6 +34,7 @@ public class BoardControllerTests {
 	@Setter(onMethod_= {@Autowired})
 	private WebApplicationContext ctx;
 	
+
 	private MockMvc mockMvc; //가짜로 mvc 패턴 테스트를 할수 있는것,url과 파라미터 등을 브라우저에서 사용하는 것처럼 만들어서
 	
 	@Before   //테스트 전에 실행되는 메서드
@@ -79,5 +86,7 @@ public class BoardControllerTests {
 		
 		log.info(resultPage);
 	}
+	
+	
 	
 }
