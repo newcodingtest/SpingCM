@@ -15,14 +15,14 @@
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                           board modify/delete
+                           board modify/delete ${cri.pageNum} ${cri.amount} 
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                         <form>
                         <input type='hidden' name='pageNum' value='${cri.pageNum}'>
-                        <input type='hidden' name='amount' value='${cri.pageNum}'>
-                        <input type='hidden' name='amount' value='${board.bno}'>
+                        <input type='hidden' name='amount' value='${cri.amount}'>
+                        <input type='hidden' name='bno' value='${board.bno}'>
                         	<div class="form-group">
                                             <label>BNO</label>
                                             <input class="form-control" name="bno" readonly="readonly" value='<c:out value="${board.bno}"/>'>
@@ -45,7 +45,7 @@
                           	<!-- data-oper='modify' html5 이상에서 지원하는 커스텀 데이터 속성 -->
                           	  <button type="button" class="btn btn-default" data-oper='modify'>수정확인</button>
                               <button type="button" class="btn btn-danger" data-oper='remove'>삭제</button>
-                              <button type="button" class="btn btn-info listBtn" data-oper='list'>글 목록</button>
+                              <button type="button" class="btn btn-info listBtn" data-oper='list'><a href='/board/list'>글 목록</a></button>
                          </form>
                         </div>
                         <!-- /.panel-body -->
@@ -71,21 +71,28 @@ $(document).ready(function(){
 	
 	console.log(operation);
 	
-	if(operation=='list'){
-		self.location="/board/list";
+	if(operation=='list'){   //버튼눌렀을때 속성이 list일시 
+		//self.location="/board/list";
+		formObj.attr("action","/board/list").attr("method","get");
 		
-	}else if(operation=='remove'){
+	/* 	var pageNumTag=$('input[name=pageNum]').val();
+		var amountTag=$('input[name=amount]').val();
+		
+		console.log("pageNumTag: "+ pageNumTag+"amountTag: "+amountTag)
+		formObj.empty();
+		formObj.append(pageNumTag);
+		formObj.append(amountTag); */
+		
+	}else if(operation=='remove'){ //버튼눌렀을때 속성이 remove일시 
 		formObj.attr("action","/board/remove")
 		.attr("method","post");
 		
 		formObj.submit();
-	}else if(operation=='modify'){
+	}else if(operation=='modify'){ //버튼눌렀을때 속성이 modify일시 
 		formObj.attr("action","/board/modify")
 		.attr("method","post");
-		
-		formObj.submit();
 	}
-		
+	formObj.submit();	
 	})
 	
 
