@@ -65,7 +65,8 @@
                           	  $(".modBtn").click(function(e){
                           		  e.preventDefault();
                           		  actionForm.attr("action","/board/modify");
-                          		  actionForm.submit();
+                          		
+                        		actionForm.submit();
                           	  });
                           	  
                           	  
