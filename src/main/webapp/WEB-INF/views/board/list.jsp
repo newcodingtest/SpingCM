@@ -42,8 +42,22 @@
                                  </c:forEach>
                                 </tbody>
                             </table>
-                            
-                            <h3>${pageMaker}</h3>
+<!-- ========================= 검색 폼 ===========================-->                          
+                           <form id="searchForm" action="/board/list" method="get">
+            				<select name="type">
+            					<option value="" ${pageMaker.cri.type == null? "selected" : ""}>---</option>
+            					<option value="T" ${pageMaker.cri.type eq 'T' ? "selected" : ""}>제목</option>
+            					<option value="C" ${pageMaker.cri.type eq 'C' ? "selected" : ""}>내용</option>
+            					<option value="W" ${pageMaker.cri.type eq 'W' ? "selected" : ""}>작성자</option>
+            					<option value="TC" ${pageMaker.cri.type eq 'TC' ? "selected" : ""}>제목+내용</option>
+            					<option value="TCW" ${pageMaker.cri.type eq 'TCW' ? "selected" : ""}>제목+내용+작성자</option>
+            				</select>
+            				<input type='text' name='keyword' value='${pageMaker.cri.keyword}'>
+            				<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum}'>
+            				<input type='hidden' name='amount' value='${pageMaker.cri.amount}'>
+            				<button class="btn btn-default">검색</button>	               
+                           </form>
+                           
                             <div class='pull-right'>
                             	<ul class="pagination">
 <!-- 이전 버튼 https://getbootstrap.com/docs/4.0/components/pagination/ 참고-->
@@ -66,10 +80,12 @@
 									</c:if>	
 			                     </ul>
                             </div>
-                           
+<!-- =========================액션 폼 ============================== -->                           
                            <form id="actionForm" action="/board/list" method='get'>
                            	<input type='hidden' name='pageNum' value='${pageMaker.cri.pageNum }'>
                            	<input type='hidden' name='amount' value='${pageMaker.cri.amount }'>
+                           	<input type='hidden' name='type' value='${pageMaker.cri.type }'>
+                           	<input type='hidden' name='keyword' value='${pageMaker.cri.keyword }'>
                            </form>
                         </div>
                         <!-- /.panel-body -->
@@ -104,7 +120,7 @@
 <!--   글 번호 등록 알람창 >> [?번째 글이 등록되었습니다] ------------------------->            
  <script type="text/javascript">
  $(document).ready(function(){
-	// 1. 글등록 알람창
+	// 1. 글등록 알람창======================================
 	 var result='<c:out value="${result}"/>';
 	 
 	 
@@ -113,9 +129,6 @@
 	 history.replaceState({},null,null);
 	 
 	 function checkModal(result){
-		 
-	
-		 
 		 
 		 if(result==''|| history.state){ //히스토리는 이벤트를 담아두는 문서객체
 			 return;
@@ -138,7 +151,7 @@
 		 self.location="/board/register";
 	 });
 	 
-	 // 3. 페이징
+	 // 3. 페이징==================================
 	 var actionForm=$("#actionForm");
 	 
 	 $(".page-link").on("click", function(e){
@@ -153,7 +166,7 @@
 		 actionForm.submit();
 	 });
 	 
-	 // 4. 글 누르면 상세보기 이동란
+	 // 4. 글 누르면 상세보기 이동란======================
 	 $(".move").on("click", function(e){
 		 e.preventDefault();
 		 
@@ -164,7 +177,21 @@
 		 actionForm.append("<input type='hidden' name='bno' value='"+targetBno+"'>'");
 		 actionForm.attr("action","/board/get").submit();
 		 
-	 })
+	 });
+	 
+	 // 5. 검색 후의 페이징 처리==========================================
+	 var searchForm = $("#searchForm");
+	 
+	 $("#searchForm btn").on("click", function(e){
+		 
+		 e.preventDefault();
+		 console.log(".......................click");
+		 
+		 //항상 검색 후의 결과는 첫 페이지가 나오도록 설정
+		 searchForm.find("input[name='pageNum']").val(1);
+		 
+		 searchForm.submit();
+	 });
  });
  
  </script>          
