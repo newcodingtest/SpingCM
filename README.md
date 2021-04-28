@@ -3,9 +3,13 @@
 
 
  *JDK 1.8
+ 
  *ORACLE 11G
+ 
  *Eclipse
+ 
  *Ojdbc 8
+ 
  *Spring + Java
 
 ## 브렌치 릴리즈.
