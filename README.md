@@ -10,7 +10,7 @@
  
  *Ojdbc 8
  
- *Spring + Java
+ *Spring + Java + Window 10.
 
 ## 브렌치 릴리즈.
  ##### 1  test01 ----> 게시판 CRUD 구현
