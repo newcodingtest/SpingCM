@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="customAccessDenied" class="org.zerock.security.CustomAccessDeniedHandler"></bean>
+<bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"></bean>
+<!-- <bean id="customPasswordEncoder" class="org.zerock.security.CustomNoOpasswordEncoder"></bean> -->
+<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+<bean id="customUserDetailsService" class="org.zerock.security.CustomUserDetailsService" />
+
+
+<security:http auto-config="true" use-expressions="true">
+	<!-- 페이지당 접근 허용 page 설정 -->
+	<security:intercept-url pattern="/sample/all" access="permitAll" />
+	<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')"/>
+	<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+<!-- 	<security:access-denied-handler error-page="/accessError" /> -->
+	<security:access-denied-handler ref="customAccessDenied" />
+	<!-- login-page 속성의 url는 반드시 get 방식으로 접근하는 url 지정  -->
+	<!-- <security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess"  /> -->
+	<security:form-login login-page="/customLogin" />
+	
+
+	
+	<!-- 로그아웃 처리와 LogoutSuccessHandler post 방식으로만 작동함 -->
+	<security:logout logout-url="/customLogout" invalidate-session="true" />
+	
+	<!-- remember-me 체크박스 선택하면 로그인 기억 기능 -->
+	<security:remember-me data-source-ref="dataSource" token-validity-seconds="604800" />
+	
+	<security:logout logout-url="/customLogout"
+	invalidate-session="true" delete-cookies="remember-me, JSESSION_ID" />
+	
+</security:http>
+
+
+<!-- db 연동 커스터마이징 -->
+	<security:authentication-manager>
+		<security:authentication-provider
+		user-service-ref="customUserDetailsService">
+	<!-- 		<security:user-service>
+				해당 회원정보에게 접근 권하는 부여하는 부분
+				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER" />
+				<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN" />
+			</security:user-service>
+			
+			DB가 있는 상태에서 Mybatis 같은 프레임워크 없이 사 간편 인증/권한 처리하기
+			<security:jdbc-user-service data-source-ref="dataSource" />
+			
+			customPasswordEncoder은 시큐리티에 API 로 내장되어 있음으로 bcryptPasswordEncoder 로 대체 사용될수있음
+			<security:password-encoder ref="customPasswordEncoder"/>
+			
+			쿼리를 이용하는 인증
+			<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="select userid, userpw, enabled from tbl_member where userid = ?" 
+																	authorities-by-username-query="select userid, auth from tbl_member_auth where userid = ?" /> -->
+			<!-- 패스워드 단방향 암호화 -->														
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
+			
+			
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>
