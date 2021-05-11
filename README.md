@@ -8,7 +8,7 @@
  
  *Eclipse
  
- *Ojdbc 8
+ *Ojdbc 8 + Mybatis
  
  *Spring + Java + Window 10.
 
