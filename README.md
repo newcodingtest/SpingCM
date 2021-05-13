@@ -1,4 +1,4 @@
-# 스프링 레거시를 이용한 게시판 프로젝트
+# 스프링 레거시 게시판 만들기
 + JDK 1.8
  
 + ORACLE 11G
@@ -11,7 +11,7 @@
  
  
  
- ##기능
+ ## 기능
 + 로그인 및 접근권한(스프링 시큐리티 적용)
    <blockquote> 	private BoardService service;
 
