@@ -13,7 +13,7 @@
  
  ##기능
 + 로그인 및 접근권한(스프링 시큐리티 적용)
-    	private BoardService service;
+   <blockquote> 	private BoardService service;
 
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()")
@@ -22,6 +22,8 @@
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()")
 	public void register() {
+	
+	</blockquote>
 
 + 게시판 CRUD
 + 댓글 CRUD(JSON 전송)
