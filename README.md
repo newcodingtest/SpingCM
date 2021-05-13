@@ -28,6 +28,23 @@
 ```
 
 + 댓글 CRUD(JSON 전송)
+```
+	//댓글 작성  조건: 로그인 된 상태
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping(value = "/new", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> create(@RequestBody ReplyVO vo) {
+
+		log.info("ReplyVO: " + vo);
+
+		int insertCount = service.register(vo);
+
+		log.info("Reply INSERT COUNT: " + insertCount);
+
+		return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+```
+
 + 파일첨부(파일삭제->스프링 배치적용)
  
  
