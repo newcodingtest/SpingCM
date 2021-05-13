@@ -27,7 +27,7 @@
 			<security:password-encoder
 				ref="bcryptPasswordEncoder" />
 		</security:authentication-provider>
-	</security:authentication-manager>
+>	</security:authentication-manager>
 	
 	
 
