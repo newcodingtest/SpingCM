@@ -13,7 +13,24 @@
  
  ## 기능
 + 로그인 및 접근권한(<a href="https://github.com/newcodingtest/SpingCM/blob/Spring/src/main/webapp/WEB-INF/spring/security-context.xml">스프링 시큐리티 적용</a>)
-<blockquote>ddd</blockquote>
+<blockquote>
+	<!-- 로그인 세션유지 -->
+		<security:remember-me
+			data-source-ref="dataSource" token-validity-seconds="604800" />
+		<!-- 로그아웃시 쿠기 및 세션 삭제 -->
+		<security:logout logout-url="/customLogout"
+			invalidate-session="true" delete-cookies="remember-me,JSESSION_ID" />
+<security:authentication-manager>
+		<!-- 로그인 인증 절차확인 -->
+		<security:authentication-provider
+			user-service-ref="customUserDetailsService">
+			<!-- 비밀번호 단방향 암호화 등록 -->
+			<security:password-encoder
+				ref="bcryptPasswordEncoder" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+</blockquote>
+1.단방향 암호화 2.로그인시 세션유지 3.로그아웃시 세션삭제 3.로그인 기억하기(remember-me)
 
 + 게시판 CRUD
 + 댓글 CRUD(JSON 전송)
