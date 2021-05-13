@@ -13,7 +13,7 @@
  
  ## 기능
 + 로그인 및 접근권한(<a href="https://github.com/newcodingtest/SpingCM/blob/Spring/src/main/webapp/WEB-INF/spring/security-context.xml">스프링 시큐리티 적용</a>)
-    <blockquote>
+    <blockquote>zzz</blockquote>
 	<!-- 로그인 세션유지 -->
 		<security:remember-me
 			data-source-ref="dataSource" token-validity-seconds="604800" />
@@ -29,7 +29,7 @@
 				ref="bcryptPasswordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>
-	</blockquote>
+	
 
 1.단방향 암호화 2.로그인시 세션유지 3.로그아웃시 세션삭제 3.로그인 기억하기(remember-me)
 
