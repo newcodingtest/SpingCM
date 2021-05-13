@@ -20,15 +20,16 @@
 		<!-- 로그아웃시 쿠기 및 세션 삭제 -->
 		<security:logout logout-url="/customLogout"
 			invalidate-session="true" delete-cookies="remember-me,JSESSION_ID" />
-<security:authentication-manager>
+		<security:authentication-manager>
 		<!-- 로그인 인증 절차확인 -->
-		<security:authentication-provider
+			<security:authentication-provider
 			user-service-ref="customUserDetailsService">
 			<!-- 비밀번호 단방향 암호화 등록 -->
-			<security:password-encoder
-				ref="bcryptPasswordEncoder" />
-		</security:authentication-provider>
-	</security:authentication-manager> 
+				<security:password-encoder
+					ref="bcryptPasswordEncoder" />
+				</security:authentication-provider>
+			</security:authentication-manager> 
+	
 '''
 	
 	
