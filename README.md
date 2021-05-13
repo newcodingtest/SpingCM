@@ -13,7 +13,11 @@
  
  ##기능
 + 로그인 및 접근권한(스프링 시큐리티 적용)
-  	private BoardService service;
+    	private BoardService service;
+
+	@GetMapping("/register")
+	@PreAuthorize("isAuthenticated()")
+	public void register() {
 
 	@GetMapping("/register")
 	@PreAuthorize("isAuthenticated()")
