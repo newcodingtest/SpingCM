@@ -14,7 +14,7 @@
  ## 기능
 + 로그인 및 접근권한(<a href="https://github.com/newcodingtest/SpingCM/blob/Spring/src/main/webapp/WEB-INF/spring/security-context.xml">스프링 시큐리티 적용</a>)
 >		<!-- 로그인 세션유지 -->
-		><security:remember-me
+		<security:remember-me
 			data-source-ref="dataSource" token-validity-seconds="604800" />
 		<!-- 로그아웃시 쿠기 및 세션 삭제 -->
 		<security:logout logout-url="/customLogout"
